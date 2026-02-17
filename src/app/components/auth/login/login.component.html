@@ -1,0 +1,116 @@
+<app-navbar></app-navbar>
+
+<div class="login-container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0">
+          <div class="card-body p-5">
+            <!-- Header -->
+            <div class="text-center mb-4">
+              <div class="icon-circle mb-3">
+                <i class="bi bi-box-arrow-in-right display-4 text-primary"></i>
+              </div>
+              <h2 class="fw-bold">Connexion</h2>
+              <p class="text-muted">Connectez-vous pour accéder à votre compte</p>
+            </div>
+
+            <!-- Error Message -->
+            <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>
+              {{ errorMessage }}
+            </div>
+
+            <!-- Login Form -->
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <!-- Email Field -->
+              <div class="mb-3">
+                <label for="email" class="form-label fw-semibold">
+                  <i class="bi bi-envelope-fill me-1"></i>
+                  Email
+                </label>
+                <input
+                  type="email"
+                  class="form-control form-control-lg"
+                  id="email"
+                  formControlName="email"
+                  [class.is-invalid]="email?.invalid && email?.touched"
+                  [class.is-valid]="email?.valid && email?.touched"
+                  placeholder="votre.email@example.com">
+
+                <div class="invalid-feedback" *ngIf="email?.invalid && email?.touched">
+                  <span *ngIf="email?.errors?.['required']">L'email est requis.</span>
+                  <span *ngIf="email?.errors?.['email']">Veuillez entrer un email valide.</span>
+                </div>
+              </div>
+
+              <!-- Password Field -->
+              <div class="mb-3">
+                <label for="password" class="form-label fw-semibold">
+                  <i class="bi bi-lock-fill me-1"></i>
+                  Mot de passe
+                </label>
+                <input
+                  type="password"
+                  class="form-control form-control-lg"
+                  id="password"
+                  formControlName="password"
+                  [class.is-invalid]="password?.invalid && password?.touched"
+                  [class.is-valid]="password?.valid && password?.touched"
+                  placeholder="••••••••">
+
+                <div class="invalid-feedback" *ngIf="password?.invalid && password?.touched">
+                  <span *ngIf="password?.errors?.['required']">Le mot de passe est requis.</span>
+                  <span *ngIf="password?.errors?.['minlength']">
+                    Le mot de passe doit contenir au moins 6 caractères.
+                  </span>
+                </div>
+              </div>
+
+              <!-- Test Credentials Helper -->
+              <div class="mb-3 text-center">
+                <small class="text-muted">
+                  Compte de test disponible -
+                  <a href="#" class="text-primary" (click)="fillTestCredentials(); $event.preventDefault()">
+                    Remplir automatiquement
+                  </a>
+                </small>
+              </div>
+
+              <!-- Submit Button -->
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg w-100 mb-3"
+                [disabled]="isLoading">
+                <span *ngIf="!isLoading">
+                  <i class="bi bi-box-arrow-in-right me-2"></i>
+                  Se connecter
+                </span>
+                <span *ngIf="isLoading">
+                  <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                  Connexion en cours...
+                </span>
+              </button>
+
+              <!-- Register Link -->
+              <div class="text-center">
+                <p class="text-muted mb-0">
+                  Pas encore de compte ?
+                  <a routerLink="/register" class="text-primary fw-semibold">S'inscrire</a>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Back to Home -->
+        <div class="text-center mt-3">
+          <a routerLink="/home" class="text-muted">
+            <i class="bi bi-arrow-left me-1"></i>
+            Retour à l'accueil
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
