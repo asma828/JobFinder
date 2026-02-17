@@ -140,6 +140,19 @@
       "notes": "",
       "dateAdded": "2026-02-16T17:36:55.107Z",
       "id": 9
+    },
+    {
+      "userId": 3,
+      "offerId": "1130304",
+      "apiSource": "remoteok",
+      "title": "Manager Software Engineering",
+      "company": "Chainguard",
+      "location": "Remote",
+      "url": "https://remoteOK.com/remote-jobs/remote-manager-software-engineering-chainguard-1130304",
+      "status": "en_attente",
+      "notes": "",
+      "dateAdded": "2026-02-17T13:03:31.003Z",
+      "id": 10
     }
   ]
 }

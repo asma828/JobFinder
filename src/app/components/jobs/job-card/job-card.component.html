@@ -50,21 +50,20 @@
         Voir l'offre
       </button>
 
-      <!-- ✅ FAVORITE BUTTON (ALWAYS VISIBLE) -->
-      <ng-container *ngIf="isFavorite$ | async as isFavorite">
+      <!--  FAVORITE BUTTON -->
+      <ng-container *ngIf="{ isFav: isFavorite$ | async } as state">
         <button
           class="btn"
-          [class.btn-warning]="isFavorite"
-          [class.btn-outline-warning]="!isFavorite"
-          [class.text-white]="isFavorite"
-          (click)="toggleFavorite(isFavorite)"
+          [class.btn-warning]="state.isFav"
+          [class.btn-outline-warning]="!state.isFav"
+          [class.text-white]="state.isFav"
+          (click)="toggleFavorite(!!state.isFav)"
           [title]="isAuthenticated
-            ? (isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris')
-            : 'Connectez-vous pour ajouter aux favoris'">
-
+      ? (state.isFav ? 'Retirer des favoris' : 'Ajouter aux favoris')
+      : 'Connectez-vous pour ajouter aux favoris'">
           <i class="bi"
-             [class.bi-star-fill]="isFavorite"
-             [class.bi-star]="!isFavorite"></i>
+             [class.bi-star-fill]="state.isFav"
+             [class.bi-star]="!state.isFav"></i>
         </button>
       </ng-container>
 
