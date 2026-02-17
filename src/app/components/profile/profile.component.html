@@ -1,0 +1,279 @@
+<app-navbar></app-navbar>
+
+<div class="profile-container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <!-- Page Header -->
+        <div class="page-header text-center mb-5">
+          <div class="profile-avatar mb-3">
+            <i class="bi bi-person-circle display-1 text-primary"></i>
+          </div>
+          <h1 class="fw-bold mb-2">Mon Profil</h1>
+          <p class="text-muted">Gérez vos informations personnelles</p>
+        </div>
+
+        <!-- Success Message -->
+        <div class="alert alert-success" role="alert" *ngIf="successMessage">
+          <i class="bi bi-check-circle-fill me-2"></i>
+          {{ successMessage }}
+        </div>
+
+        <!-- Error Message -->
+        <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          {{ errorMessage }}
+        </div>
+
+        <!-- Profile Information Card -->
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">
+              <i class="bi bi-person-fill me-2"></i>
+              Informations personnelles
+            </h5>
+          </div>
+          <div class="card-body p-4">
+            <form [formGroup]="profileForm" (ngSubmit)="onUpdateProfile()">
+              <div class="row">
+                <!-- First Name -->
+                <div class="col-md-6 mb-3">
+                  <label for="firstName" class="form-label fw-semibold">
+                    Prénom
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg"
+                    id="firstName"
+                    formControlName="firstName"
+                    [class.is-invalid]="firstName?.invalid && firstName?.touched"
+                    [class.is-valid]="firstName?.valid && firstName?.touched">
+
+                  <div class="invalid-feedback" *ngIf="firstName?.invalid && firstName?.touched">
+                    <span *ngIf="firstName?.errors?.['required']">Le prénom est requis.</span>
+                    <span *ngIf="firstName?.errors?.['minlength']">
+                      Le prénom doit contenir au moins 2 caractères.
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Last Name -->
+                <div class="col-md-6 mb-3">
+                  <label for="lastName" class="form-label fw-semibold">
+                    Nom
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg"
+                    id="lastName"
+                    formControlName="lastName"
+                    [class.is-invalid]="lastName?.invalid && lastName?.touched"
+                    [class.is-valid]="lastName?.valid && lastName?.touched">
+
+                  <div class="invalid-feedback" *ngIf="lastName?.invalid && lastName?.touched">
+                    <span *ngIf="lastName?.errors?.['required']">Le nom est requis.</span>
+                    <span *ngIf="lastName?.errors?.['minlength']">
+                      Le nom doit contenir au moins 2 caractères.
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label fw-semibold">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  class="form-control form-control-lg"
+                  id="email"
+                  formControlName="email"
+                  [class.is-invalid]="email?.invalid && email?.touched"
+                  [class.is-valid]="email?.valid && email?.touched">
+
+                <div class="invalid-feedback" *ngIf="email?.invalid && email?.touched">
+                  <span *ngIf="email?.errors?.['required']">L'email est requis.</span>
+                  <span *ngIf="email?.errors?.['email']">Veuillez entrer un email valide.</span>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg w-100"
+                [disabled]="isLoading || profileForm.invalid">
+                <span *ngIf="!isLoading">
+                  <i class="bi bi-save me-2"></i>
+                  Enregistrer les modifications
+                </span>
+                <span *ngIf="isLoading">
+                  <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                  Enregistrement...
+                </span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Change Password Card -->
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-header bg-warning text-dark">
+            <h5 class="mb-0">
+              <i class="bi bi-lock-fill me-2"></i>
+              Changer le mot de passe
+            </h5>
+          </div>
+          <div class="card-body p-4">
+            <button
+              class="btn btn-warning w-100 mb-3"
+              (click)="togglePasswordForm()"
+              *ngIf="!showPasswordForm">
+              <i class="bi bi-key-fill me-2"></i>
+              Modifier mon mot de passe
+            </button>
+
+            <div *ngIf="showPasswordForm">
+              <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()">
+                <!-- Current Password -->
+                <div class="mb-3">
+                  <label for="currentPassword" class="form-label fw-semibold">
+                    Mot de passe actuel
+                  </label>
+                  <input
+                    type="password"
+                    class="form-control form-control-lg"
+                    id="currentPassword"
+                    formControlName="currentPassword"
+                    [class.is-invalid]="currentPassword?.invalid && currentPassword?.touched">
+
+                  <div class="invalid-feedback" *ngIf="currentPassword?.invalid && currentPassword?.touched">
+                    Le mot de passe actuel est requis.
+                  </div>
+                </div>
+
+                <!-- New Password -->
+                <div class="mb-3">
+                  <label for="newPassword" class="form-label fw-semibold">
+                    Nouveau mot de passe
+                  </label>
+                  <input
+                    type="password"
+                    class="form-control form-control-lg"
+                    id="newPassword"
+                    formControlName="newPassword"
+                    [class.is-invalid]="newPassword?.invalid && newPassword?.touched">
+
+                  <div class="invalid-feedback" *ngIf="newPassword?.invalid && newPassword?.touched">
+                    <span *ngIf="newPassword?.errors?.['required']">Le nouveau mot de passe est requis.</span>
+                    <span *ngIf="newPassword?.errors?.['minlength']">
+                      Le mot de passe doit contenir au moins 8 caractères.
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="mb-3">
+                  <label for="confirmPassword" class="form-label fw-semibold">
+                    Confirmer le nouveau mot de passe
+                  </label>
+                  <input
+                    type="password"
+                    class="form-control form-control-lg"
+                    id="confirmPassword"
+                    formControlName="confirmPassword"
+                    [class.is-invalid]="(confirmPassword?.invalid && confirmPassword?.touched) || (passwordForm.errors?.['passwordMismatch'] && confirmPassword?.touched)">
+
+                  <div class="invalid-feedback" *ngIf="confirmPassword?.invalid && confirmPassword?.touched">
+                    La confirmation du mot de passe est requise.
+                  </div>
+                  <div class="invalid-feedback" *ngIf="passwordForm.errors?.['passwordMismatch'] && confirmPassword?.touched">
+                    Les mots de passe ne correspondent pas.
+                  </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex gap-2">
+                  <button
+                    type="submit"
+                    class="btn btn-warning flex-grow-1"
+                    [disabled]="isLoading || passwordForm.invalid">
+                    <span *ngIf="!isLoading">
+                      <i class="bi bi-check-circle me-2"></i>
+                      Changer le mot de passe
+                    </span>
+                    <span *ngIf="isLoading">
+                      <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                      Modification...
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    (click)="togglePasswordForm()">
+                    Annuler
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Delete Account Card -->
+        <div class="card shadow-sm border-danger mb-4">
+          <div class="card-header bg-danger text-white">
+            <h5 class="mb-0">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>
+              Zone dangereuse
+            </h5>
+          </div>
+          <div class="card-body p-4">
+            <p class="text-muted mb-3">
+              La suppression de votre compte est définitive. Toutes vos données (favoris, candidatures) seront perdues.
+            </p>
+
+            <button
+              class="btn btn-outline-danger w-100 mb-3"
+              (click)="toggleDeleteConfirm()"
+              *ngIf="!showDeleteConfirm">
+              <i class="bi bi-trash-fill me-2"></i>
+              Supprimer mon compte
+            </button>
+
+            <div class="alert alert-danger" role="alert" *ngIf="showDeleteConfirm">
+              <h6 class="alert-heading">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                Êtes-vous absolument sûr ?
+              </h6>
+              <p class="mb-3">
+                Cette action est <strong>irréversible</strong>. Toutes vos données seront définitivement supprimées.
+              </p>
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-danger flex-grow-1"
+                  (click)="onDeleteAccount()"
+                  [disabled]="isLoading">
+                  <span *ngIf="!isLoading">
+                    <i class="bi bi-trash-fill me-2"></i>
+                    Oui, supprimer définitivement
+                  </span>
+                  <span *ngIf="isLoading">
+                    <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                    Suppression...
+                  </span>
+                </button>
+
+                <button
+                  class="btn btn-secondary"
+                  (click)="toggleDeleteConfirm()">
+                  Annuler
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
