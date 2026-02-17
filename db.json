@@ -1,0 +1,145 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Asma",
+      "lastName": "Lachhab",
+      "email": "asmalachhab66@gmail.com",
+      "password": "asma123"
+    },
+    {
+      "firstName": "salma",
+      "lastName": "hamdi",
+      "email": "salma@gmail.com",
+      "password": "Salma&123",
+      "id": 2
+    },
+    {
+      "firstName": "lana",
+      "lastName": "dilray",
+      "email": "lana@gmail.com",
+      "password": "LanaLana123",
+      "id": 3
+    }
+  ],
+  "favoritesOffers": [],
+  "applications": [
+    {
+      "userId": 1,
+      "offerId": "1130195",
+      "apiSource": "remoteok",
+      "title": "Developer Relations Engineer",
+      "company": "Horizen Labs",
+      "location": "Remote",
+      "url": "https://remoteOK.com/remote-jobs/remote-developer-relations-engineer-horizen-labs-1130195",
+      "status": "accepte",
+      "notes": "dcd\n",
+      "dateAdded": "2026-02-12T11:19:19.842Z",
+      "id": 1
+    },
+    {
+      "userId": 3,
+      "offerId": "1130268",
+      "apiSource": "remoteok",
+      "title": "Senior Manager RFP Response",
+      "company": "RxSense",
+      "location": "Remote",
+      "url": "https://remoteOK.com/remote-jobs/remote-senior-manager-rfp-response-rxsense-1130268",
+      "status": "en_attente",
+      "notes": "",
+      "dateAdded": "2026-02-16T17:36:10.219Z",
+      "id": 2
+    },
+    {
+      "userId": 3,
+      "offerId": "1130268",
+      "apiSource": "remoteok",
+      "title": "Senior Manager RFP Response",
+      "company": "RxSense",
+      "location": "Remote",
+      "url": "https://remoteOK.com/remote-jobs/remote-senior-manager-rfp-response-rxsense-1130268",
+      "status": "en_attente",
+      "notes": "",
+      "dateAdded": "2026-02-16T17:36:12.026Z",
+      "id": 3
+    },
+    {
+      "userId": 3,
+      "offerId": "1130266",
+      "apiSource": "remoteok",
+      "title": "Integrated Marketing Manager",
+      "company": "OpenAI",
+      "location": "Remote",
+      "url": "https://remoteOK.com/remote-jobs/remote-integrated-marketing-manager-openai-1130266",
+      "status": "en_attente",
+      "notes": "",
+      "dateAdded": "2026-02-16T17:36:14.280Z",
+      "id": 4
+    },
+    {
+      "userId": 3,
+      "offerId": "1130304",
+      "apiSource": "remoteok",
+      "title": "Manager Software Engineering",
+      "company": "Chainguard",
+      "location": "Remote",
+      "url": "https://remoteOK.com/remote-jobs/remote-manager-software-engineering-chainguard-1130304",
+      "status": "en_attente",
+      "notes": "",
+      "dateAdded": "2026-02-16T17:36:31.934Z",
+      "id": 5
+    },
+    {
+      "userId": 3,
+      "offerId": "1130304",
+      "apiSource": "remoteok",
+      "title": "Manager Software Engineering",
+      "company": "Chainguard",
+      "location": "Remote",
+      "url": "https://remoteOK.com/remote-jobs/remote-manager-software-engineering-chainguard-1130304",
+      "status": "en_attente",
+      "notes": "",
+      "dateAdded": "2026-02-16T17:36:32.498Z",
+      "id": 6
+    },
+    {
+      "userId": 3,
+      "offerId": "1130304",
+      "apiSource": "remoteok",
+      "title": "Manager Software Engineering",
+      "company": "Chainguard",
+      "location": "Remote",
+      "url": "https://remoteOK.com/remote-jobs/remote-manager-software-engineering-chainguard-1130304",
+      "status": "en_attente",
+      "notes": "",
+      "dateAdded": "2026-02-16T17:36:32.693Z",
+      "id": 7
+    },
+    {
+      "userId": 3,
+      "offerId": "1130304",
+      "apiSource": "remoteok",
+      "title": "Manager Software Engineering",
+      "company": "Chainguard",
+      "location": "Remote",
+      "url": "https://remoteOK.com/remote-jobs/remote-manager-software-engineering-chainguard-1130304",
+      "status": "en_attente",
+      "notes": "",
+      "dateAdded": "2026-02-16T17:36:32.911Z",
+      "id": 8
+    },
+    {
+      "userId": 3,
+      "offerId": "1130304",
+      "apiSource": "remoteok",
+      "title": "Manager Software Engineering",
+      "company": "Chainguard",
+      "location": "Remote",
+      "url": "https://remoteOK.com/remote-jobs/remote-manager-software-engineering-chainguard-1130304",
+      "status": "en_attente",
+      "notes": "",
+      "dateAdded": "2026-02-16T17:36:55.107Z",
+      "id": 9
+    }
+  ]
+}
