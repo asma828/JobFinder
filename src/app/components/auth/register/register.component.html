@@ -1,40 +1,41 @@
 <app-navbar></app-navbar>
 
-<div class="register-container">
+<div class="auth-container">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8 col-lg-6">
-        <div class="card shadow-lg border-0">
-          <div class="card-body p-5">
+
+        <div class="card auth-card border-0">
+          <div class="card-body auth-card-body">
+
             <!-- Header -->
-            <div class="text-center mb-4">
-              <div class="icon-circle mb-3">
-                <i class="bi bi-person-plus-fill display-4 text-primary"></i>
+            <div class="auth-header">
+              <div class="auth-icon">
+                <i class="bi bi-person-plus-fill"></i>
               </div>
-              <h2 class="fw-bold">Inscription</h2>
-              <p class="text-muted">Créez votre compte pour commencer</p>
+              <h2 class="auth-title">Créer un compte</h2>
+              <p class="auth-subtitle">Rejoignez des milliers de chercheurs d'emploi</p>
             </div>
 
-            <!-- Success Message -->
-            <div class="alert alert-success" role="alert" *ngIf="successMessage">
+            <!-- Success -->
+            <div class="alert alert-success mb-4" role="alert" *ngIf="successMessage">
               <i class="bi bi-check-circle-fill me-2"></i>
               {{ successMessage }}
             </div>
 
-            <!-- Error Message -->
-            <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+            <!-- Error -->
+            <div class="alert alert-danger mb-4" role="alert" *ngIf="errorMessage">
               <i class="bi bi-exclamation-triangle-fill me-2"></i>
               {{ errorMessage }}
             </div>
 
-            <!-- Register Form -->
+            <!-- Form -->
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
               <div class="row">
-                <!-- First Name -->
-                <div class="col-md-6 mb-3">
-                  <label for="firstName" class="form-label fw-semibold">
-                    <i class="bi bi-person-fill me-1"></i>
-                    Prénom
+                <div class="col-md-6 mb-4">
+                  <label for="firstName" class="field-label">
+                    <i class="bi bi-person-fill"></i> Prénom
                   </label>
                   <input
                     type="text"
@@ -44,20 +45,15 @@
                     [class.is-invalid]="firstName?.invalid && firstName?.touched"
                     [class.is-valid]="firstName?.valid && firstName?.touched"
                     placeholder="Jean">
-
                   <div class="invalid-feedback" *ngIf="firstName?.invalid && firstName?.touched">
                     <span *ngIf="firstName?.errors?.['required']">Le prénom est requis.</span>
-                    <span *ngIf="firstName?.errors?.['minlength']">
-                      Le prénom doit contenir au moins 2 caractères.
-                    </span>
+                    <span *ngIf="firstName?.errors?.['minlength']">Minimum 2 caractères.</span>
                   </div>
                 </div>
 
-                <!-- Last Name -->
-                <div class="col-md-6 mb-3">
-                  <label for="lastName" class="form-label fw-semibold">
-                    <i class="bi bi-person-fill me-1"></i>
-                    Nom
+                <div class="col-md-6 mb-4">
+                  <label for="lastName" class="field-label">
+                    <i class="bi bi-person-fill"></i> Nom
                   </label>
                   <input
                     type="text"
@@ -67,21 +63,16 @@
                     [class.is-invalid]="lastName?.invalid && lastName?.touched"
                     [class.is-valid]="lastName?.valid && lastName?.touched"
                     placeholder="Dupont">
-
                   <div class="invalid-feedback" *ngIf="lastName?.invalid && lastName?.touched">
                     <span *ngIf="lastName?.errors?.['required']">Le nom est requis.</span>
-                    <span *ngIf="lastName?.errors?.['minlength']">
-                      Le nom doit contenir au moins 2 caractères.
-                    </span>
+                    <span *ngIf="lastName?.errors?.['minlength']">Minimum 2 caractères.</span>
                   </div>
                 </div>
               </div>
 
-              <!-- Email Field -->
-              <div class="mb-3">
-                <label for="email" class="form-label fw-semibold">
-                  <i class="bi bi-envelope-fill me-1"></i>
-                  Email
+              <div class="mb-4">
+                <label for="email" class="field-label">
+                  <i class="bi bi-envelope-fill"></i> Email
                 </label>
                 <input
                   type="email"
@@ -91,18 +82,15 @@
                   [class.is-invalid]="email?.invalid && email?.touched"
                   [class.is-valid]="email?.valid && email?.touched"
                   placeholder="jean.dupont@example.com">
-
                 <div class="invalid-feedback" *ngIf="email?.invalid && email?.touched">
                   <span *ngIf="email?.errors?.['required']">L'email est requis.</span>
-                  <span *ngIf="email?.errors?.['email']">Veuillez entrer un email valide.</span>
+                  <span *ngIf="email?.errors?.['email']">Email invalide.</span>
                 </div>
               </div>
 
-              <!-- Password Field -->
-              <div class="mb-3">
-                <label for="password" class="form-label fw-semibold">
-                  <i class="bi bi-lock-fill me-1"></i>
-                  Mot de passe
+              <div class="mb-4">
+                <label for="password" class="field-label">
+                  <i class="bi bi-lock-fill"></i> Mot de passe
                 </label>
                 <input
                   type="password"
@@ -112,27 +100,22 @@
                   [class.is-invalid]="password?.invalid && password?.touched"
                   [class.is-valid]="password?.valid && password?.touched"
                   placeholder="••••••••">
-
                 <div class="invalid-feedback" *ngIf="password?.invalid && password?.touched">
                   <span *ngIf="password?.errors?.['required']">Le mot de passe est requis.</span>
-                  <span *ngIf="password?.errors?.['minlength']">
-                    Le mot de passe doit contenir au moins 8 caractères.
-                  </span>
+                  <span *ngIf="password?.errors?.['minlength']">Minimum 8 caractères.</span>
                   <span *ngIf="password?.errors?.['passwordStrength']">
-                    Le mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre.
+                    Doit contenir 1 majuscule, 1 minuscule et 1 chiffre.
                   </span>
                 </div>
-
-                <small class="form-text text-muted">
-                  Minimum 8 caractères avec au moins 1 majuscule, 1 minuscule et 1 chiffre
-                </small>
+                <div class="password-hint">
+                  <i class="bi bi-info-circle-fill"></i>
+                  8 caractères minimum · 1 majuscule · 1 minuscule · 1 chiffre
+                </div>
               </div>
 
-              <!-- Confirm Password Field -->
-              <div class="mb-3">
-                <label for="confirmPassword" class="form-label fw-semibold">
-                  <i class="bi bi-lock-fill me-1"></i>
-                  Confirmer le mot de passe
+              <div class="mb-5">
+                <label for="confirmPassword" class="field-label">
+                  <i class="bi bi-shield-lock-fill"></i> Confirmer le mot de passe
                 </label>
                 <input
                   type="password"
@@ -142,50 +125,42 @@
                   [class.is-invalid]="(confirmPassword?.invalid && confirmPassword?.touched) || (registerForm.errors?.['passwordMismatch'] && confirmPassword?.touched)"
                   [class.is-valid]="confirmPassword?.valid && !registerForm.errors?.['passwordMismatch'] && confirmPassword?.touched"
                   placeholder="••••••••">
-
                 <div class="invalid-feedback" *ngIf="confirmPassword?.invalid && confirmPassword?.touched">
-                  <span *ngIf="confirmPassword?.errors?.['required']">
-                    La confirmation du mot de passe est requise.
-                  </span>
+                  <span *ngIf="confirmPassword?.errors?.['required']">La confirmation est requise.</span>
                 </div>
                 <div class="invalid-feedback" *ngIf="registerForm.errors?.['passwordMismatch'] && confirmPassword?.touched">
                   Les mots de passe ne correspondent pas.
                 </div>
               </div>
 
-              <!-- Submit Button -->
               <button
                 type="submit"
-                class="btn btn-primary btn-lg w-100 mb-3"
+                class="btn-auth"
                 [disabled]="isLoading">
-                <span *ngIf="!isLoading">
-                  <i class="bi bi-person-plus-fill me-2"></i>
-                  S'inscrire
-                </span>
-                <span *ngIf="isLoading">
-                  <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                <ng-container *ngIf="!isLoading">
+                  <i class="bi bi-person-plus-fill"></i>
+                  Créer mon compte
+                </ng-container>
+                <ng-container *ngIf="isLoading">
+                  <span class="spinner-border spinner-border-sm" role="status"></span>
                   Inscription en cours...
-                </span>
+                </ng-container>
               </button>
 
-              <!-- Login Link -->
-              <div class="text-center">
-                <p class="text-muted mb-0">
-                  Vous avez déjà un compte ?
-                  <a routerLink="/login" class="text-primary fw-semibold">Se connecter</a>
-                </p>
+              <div class="auth-switch">
+                Déjà un compte ?
+                <a routerLink="/login">Se connecter</a>
               </div>
+
             </form>
           </div>
         </div>
 
-        <!-- Back to Home -->
-        <div class="text-center mt-3">
-          <a routerLink="/home" class="text-muted">
-            <i class="bi bi-arrow-left me-1"></i>
-            Retour à l'accueil
-          </a>
-        </div>
+        <a routerLink="/home" class="back-link">
+          <i class="bi bi-arrow-left"></i>
+          Retour à l'accueil
+        </a>
+
       </div>
     </div>
   </div>

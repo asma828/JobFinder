@@ -1,126 +1,113 @@
 <div class="search-container">
-  <div class="card shadow border-0">
-    <div class="card-body p-4">
-      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-        <div class="row g-3">
-          <!-- Keyword Field -->
-          <div class="col-md-5">
-            <label for="keyword" class="form-label fw-semibold">
-              <i class="bi bi-briefcase-fill me-1"></i>
-              Mots-clés (Titre du poste)
-            </label>
+  <div class="card search-card border-0">
+
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+      <div class="row g-3 align-items-end">
+
+        <!-- Keyword -->
+        <div class="col-md-5">
+          <label for="keyword" class="form-label">
+            <i class="bi bi-briefcase-fill me-1"></i>
+            Titre du poste
+          </label>
+          <div class="search-input-wrapper">
+            <i class="bi bi-search search-icon"></i>
             <input
               type="text"
               class="form-control form-control-lg"
               id="keyword"
               formControlName="keyword"
               [class.is-invalid]="keyword?.invalid && keyword?.touched"
-              [class.is-valid]="keyword?.valid && keyword?.touched"
-              placeholder="Ex: Développeur, Designer, Manager...">
-
-            <div class="invalid-feedback" *ngIf="keyword?.invalid && keyword?.touched">
-              <span *ngIf="keyword?.errors?.['required']">Les mots-clés sont requis.</span>
-              <span *ngIf="keyword?.errors?.['minlength']">
-                Entrez au moins 2 caractères.
-              </span>
-            </div>
+              placeholder="Ex: Développeur, Designer...">
           </div>
+          <div class="invalid-feedback" *ngIf="keyword?.invalid && keyword?.touched">
+            <span *ngIf="keyword?.errors?.['required']">Les mots-clés sont requis.</span>
+            <span *ngIf="keyword?.errors?.['minlength']">Entrez au moins 2 caractères.</span>
+          </div>
+        </div>
 
-          <!-- Location Field -->
-          <div class="col-md-5">
-            <label for="location" class="form-label fw-semibold">
-              <i class="bi bi-geo-alt-fill me-1"></i>
-              Localisation
-            </label>
+        <!-- Location -->
+        <div class="col-md-5">
+          <label for="location" class="form-label">
+            <i class="bi bi-geo-alt-fill me-1"></i>
+            Localisation
+          </label>
+          <div class="search-input-wrapper">
+            <i class="bi bi-geo-alt search-icon"></i>
             <input
               type="text"
               class="form-control form-control-lg"
               id="location"
               formControlName="location"
               [class.is-invalid]="location?.invalid && location?.touched"
-              [class.is-valid]="location?.valid && location?.touched"
               placeholder="Ex: Paris, Remote, New York..."
               list="locationSuggestions">
-
             <datalist id="locationSuggestions">
               <option *ngFor="let loc of popularLocations" [value]="loc">
             </datalist>
-
-            <div class="invalid-feedback" *ngIf="location?.invalid && location?.touched">
-              <span *ngIf="location?.errors?.['required']">La localisation est requise.</span>
-              <span *ngIf="location?.errors?.['minlength']">
-                Entrez au moins 2 caractères.
-              </span>
-            </div>
           </div>
-
-          <!-- Search Button -->
-          <div class="col-md-2 d-flex align-items-end">
-            <button
-              type="submit"
-              class="btn btn-primary btn-lg w-100"
-              [disabled]="searchForm.invalid">
-              <i class="bi bi-search me-2"></i>
-              <span class="d-none d-md-inline">Rechercher</span>
-              <i class="bi bi-search d-md-none"></i>
-            </button>
+          <div class="invalid-feedback" *ngIf="location?.invalid && location?.touched">
+            <span *ngIf="location?.errors?.['required']">La localisation est requise.</span>
+            <span *ngIf="location?.errors?.['minlength']">Entrez au moins 2 caractères.</span>
           </div>
         </div>
-      </form>
 
-      <!-- Quick Search Suggestions -->
-      <div class="quick-search mt-4">
-        <small class="text-muted fw-semibold">
-          <i class="bi bi-lightning-fill me-1"></i>
-          Recherches rapides:
-        </small>
-        <div class="mt-2">
+        <!-- Button -->
+        <div class="col-md-2 d-flex align-items-end">
           <button
-            type="button"
-            class="btn btn-sm btn-outline-secondary me-2 mb-2"
-            (click)="quickSearch('Developer', 'Remote')">
-            <i class="bi bi-code-slash me-1"></i>
-            Developer - Remote
+            type="submit"
+            class="btn-search"
+            [disabled]="searchForm.invalid">
+            <i class="bi bi-search"></i>
+            <span class="d-none d-md-inline">Chercher</span>
           </button>
-          <button
-            type="button"
-            class="btn btn-sm btn-outline-secondary me-2 mb-2"
-            (click)="quickSearch('Designer', 'New York')">
-            <i class="bi bi-palette me-1"></i>
-            Designer - New York
+        </div>
+
+      </div>
+    </form>
+
+    <hr class="search-divider">
+
+    <div class="row g-0">
+      <!-- Quick searches -->
+      <div class="col-md-7">
+        <div class="quick-label">
+          <i class="bi bi-lightning-charge-fill"></i>
+          Recherches rapides
+        </div>
+        <div>
+          <button type="button" class="quick-tag" (click)="quickSearch('Developer', 'Remote')">
+            <i class="bi bi-code-slash"></i> Developer · Remote
           </button>
-          <button
-            type="button"
-            class="btn btn-sm btn-outline-secondary me-2 mb-2"
-            (click)="quickSearch('Manager', 'London')">
-            <i class="bi bi-person-badge me-1"></i>
-            Manager - London
+          <button type="button" class="quick-tag" (click)="quickSearch('Designer', 'New York')">
+            <i class="bi bi-palette"></i> Designer · New York
           </button>
-          <button
-            type="button"
-            class="btn btn-sm btn-outline-secondary me-2 mb-2"
-            (click)="quickSearch('Marketing', 'Paris')">
-            <i class="bi bi-megaphone me-1"></i>
-            Marketing - Paris
+          <button type="button" class="quick-tag" (click)="quickSearch('Manager', 'London')">
+            <i class="bi bi-person-badge"></i> Manager · London
+          </button>
+          <button type="button" class="quick-tag" (click)="quickSearch('Marketing', 'Paris')">
+            <i class="bi bi-megaphone"></i> Marketing · Paris
           </button>
         </div>
       </div>
 
-      <!-- Popular Locations -->
-      <div class="popular-locations mt-3">
-        <small class="text-muted fw-semibold">
-          <i class="bi bi-geo-fill me-1"></i>
-          Localisations populaires:
-        </small>
-        <div class="mt-2">
+      <!-- Popular locations -->
+      <div class="col-md-5">
+        <div class="quick-label">
+          <i class="bi bi-geo-fill"></i>
+          Villes populaires
+        </div>
+        <div>
           <span
             *ngFor="let loc of popularLocations.slice(0, 5)"
-            class="badge bg-light text-dark me-2 mb-2 clickable"
+            class="location-badge"
             (click)="setLocation(loc)">
+            <i class="bi bi-pin-map-fill"></i>
             {{ loc }}
           </span>
         </div>
       </div>
     </div>
+
   </div>
 </div>

@@ -1,10 +1,15 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+<nav class="navbar navbar-expand-lg">
   <div class="container">
-    <a class="navbar-brand fw-bold" routerLink="/home">
-      <i class="bi bi-briefcase-fill me-2"></i>
-      JobFinder
+
+    <!-- Brand -->
+    <a class="navbar-brand" routerLink="/home">
+      <div class="brand-icon">
+        <i class="bi bi-briefcase-fill"></i>
+      </div>
+      <span class="brand-text">JobFinder</span>
     </a>
 
+    <!-- Toggler -->
     <button
       class="navbar-toggler"
       type="button"
@@ -13,77 +18,90 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
+    <!-- Links -->
     <div class="collapse navbar-collapse" [class.show]="!isMenuCollapsed">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+
         <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">
-            <i class="bi bi-house-fill me-1"></i>
-            Accueil
+          <a class="nav-link" routerLink="/home"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}"
+             (click)="closeMenu()">
+            <i class="bi bi-house-fill"></i> Accueil
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/jobs" routerLinkActive="active" (click)="closeMenu()">
-            <i class="bi bi-search me-1"></i>
-            Rechercher
+          <a class="nav-link" routerLink="/jobs"
+             routerLinkActive="active"
+             (click)="closeMenu()">
+            <i class="bi bi-search"></i> Rechercher
           </a>
         </li>
 
-        <!-- Authenticated User Menu -->
+        <!-- Authenticated -->
         <ng-container *ngIf="currentUser">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/favorites" routerLinkActive="active" (click)="closeMenu()">
-              <i class="bi bi-star-fill me-1"></i>
-              Favoris
+            <a class="nav-link" routerLink="/favorites"
+               routerLinkActive="active"
+               (click)="closeMenu()">
+              <i class="bi bi-star-fill"></i> Favoris
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" routerLink="/applications" routerLinkActive="active" (click)="closeMenu()">
-              <i class="bi bi-file-earmark-text-fill me-1"></i>
-              Candidatures
+            <a class="nav-link" routerLink="/applications"
+               routerLinkActive="active"
+               (click)="closeMenu()">
+              <i class="bi bi-file-earmark-text-fill"></i> Candidatures
             </a>
           </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-              <i class="bi bi-person-circle me-1"></i>
-              {{ currentUser.firstName }}
-            </a>
+          <!-- User dropdown using chip -->
+          <li class="nav-item dropdown ms-lg-2">
+            <div class="user-chip dropdown-toggle"
+                 role="button"
+                 data-bs-toggle="dropdown">
+              <div class="user-avatar">
+                {{ currentUser.firstName?.charAt(0)?.toUpperCase() }}
+              </div>
+              <span class="user-name">{{ currentUser.firstName }}</span>
+            </div>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
                 <a class="dropdown-item" routerLink="/profile" (click)="closeMenu()">
-                  <i class="bi bi-person-fill me-2"></i>
-                  Mon Profil
+                  <i class="bi bi-person-fill me-2"></i> Mon Profil
                 </a>
               </li>
               <li><hr class="dropdown-divider"></li>
               <li>
-                <a class="dropdown-item text-danger" href="#" (click)="logout(); closeMenu()">
-                  <i class="bi bi-box-arrow-right me-2"></i>
-                  Déconnexion
+                <a class="dropdown-item text-danger" href="#"
+                   (click)="logout(); closeMenu()">
+                  <i class="bi bi-box-arrow-right me-2"></i> Déconnexion
                 </a>
               </li>
             </ul>
           </li>
         </ng-container>
 
-        <!-- Guest Menu -->
+        <!-- Guest -->
         <ng-container *ngIf="!currentUser">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/login" routerLinkActive="active" (click)="closeMenu()">
-              <i class="bi bi-box-arrow-in-right me-1"></i>
-              Connexion
+            <a class="nav-link" routerLink="/login"
+               routerLinkActive="active"
+               (click)="closeMenu()">
+              <i class="bi bi-box-arrow-in-right"></i> Connexion
             </a>
           </li>
-
           <li class="nav-item">
-            <a class="nav-link btn btn-light text-primary ms-lg-2" routerLink="/register" (click)="closeMenu()">
-              <i class="bi bi-person-plus-fill me-1"></i>
-              Inscription
+            <a class="nav-link nav-register-btn"
+               routerLink="/register"
+               (click)="closeMenu()">
+              <i class="bi bi-person-plus-fill me-1"></i> S'inscrire
             </a>
           </li>
         </ng-container>
+
       </ul>
     </div>
   </div>
